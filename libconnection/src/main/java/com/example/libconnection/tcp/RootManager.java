@@ -26,7 +26,7 @@ public class RootManager {
 
     private ConnectionReceiver connectionReceiver;
 
-    private ConcurrentHashMap<Socket, ConnectionHandler> connectionReceivers = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Socket, ConnectionHandler> connectionHandlers = new ConcurrentHashMap<>();
 
     private OnErrorListener onErrorListener;
 
@@ -84,7 +84,7 @@ public class RootManager {
                 try {
                     Socket socket = serverSocket.accept();
                     ConnectionHandler connectionHandler = new ConnectionHandler(socket);
-                    connectionReceivers.put(socket, connectionHandler);
+                    connectionHandlers.put(socket, connectionHandler);
                     connectionHandler.start();
                 } catch (IOException e) {
                     e.printStackTrace();
